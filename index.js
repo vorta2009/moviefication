@@ -7,9 +7,9 @@
 }
 function onTest(){
   $('#btnTest').on('click',function(event){
-    console.log('hey');
+    alert('hey');
     FB.api('/me', {fields: 'last_name'}, function(response) {
-    console.log(response);
+    alert(response);
     })
   });
 }
