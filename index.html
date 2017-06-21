@@ -23,10 +23,11 @@ window.fbAsyncInit = function() {
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 </script>
-  
-
-<script src="./index.js">
-
+<script>
+	function myFacebookLogin() {
+  FB.login(function(){}, {scope: 'publish_actions'});
+}
+</script>
 <button onclick="myFacebookLogin()">Login with Facebook</button>
 
 </body>
