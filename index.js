@@ -7,6 +7,7 @@
 }
 function onTest(){
   $('#btnTest').on('click',function(event){
+    console.log('hey');
     FB.api('/me', {fields: 'last_name'}, function(response) {
     console.log(response);
     })
@@ -15,5 +16,6 @@ function onTest(){
 
 $(function(){
   onPermission();
+  onTest();
 })
 // alert('hey');
