@@ -6,7 +6,7 @@
         FB.api('/me', {fields: 'last_name'}, function(response) {
           alert(response);
         });
-      }, {scope: 'user_friends,email'});
+      }, {scope: 'user_friends,email,publish_actions'});
     });
 }
 function onTest(){
