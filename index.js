@@ -10,7 +10,7 @@ function onTest(){
     alert('hey');
     FB.api('/me', {fields: 'last_name'}, function(response) {
     alert(response);
-    })
+    });
   });
 }
 
