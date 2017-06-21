@@ -2,7 +2,7 @@
   function onPermission(){
     $('#fbPermission').on('click',function(event){
       event.preventDefault();
-      FB.login(function(){}, {scope: 'user_friends'});
+      FB.login(function(){}, {scope: 'user_friends,email'});
     });
 }
 function onTest(){
@@ -10,7 +10,7 @@ function onTest(){
     alert('hey');
     FB.api('/me', {fields: 'last_name'}, function(response) {
     alert(response);
-    })
+    });
   });
 }
 
