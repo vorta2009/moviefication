@@ -3,7 +3,7 @@
     $('#fbPermission').on('click',function(event){
       event.preventDefault();
       FB.login(function(){
-        FB.api('/me', {fields: 'last_name'}, function(response) {
+        FB.api('/me', {fields: 'email,first_name'}, function(response) {
           alert(response);
         });
       }, {scope: 'user_friends,email,publish_actions'});
