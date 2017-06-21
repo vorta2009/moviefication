@@ -23,7 +23,6 @@
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 </script>
-<h1>mike</h1>
 <div
   class="fb-like"
   data-share="true"
@@ -31,6 +30,12 @@
   data-show-faces="true">
 whats up?
 </div>
+<script>
+function myFacebookLogin() {
+  FB.login(function(){}, {scope: 'publish_actions'});
+}
+</script>
+<button onclick="myFacebookLogin()">Login with Facebook</button>
 
 </body>
 </html>
