@@ -21,7 +21,7 @@ function onPermission(){
 function makeOMDBDiv(data){
 // Uses data from OMDB API to populate a template div
   var newDiv=$('#template').clone();
-  newDiv.find('img').attr('src',data.moviePic);
+  newDiv.find('#moviePic').attr('src',data.moviePic);
   newDiv.find('#rating').text(data.rated);
   newDiv.find('#releaseYear').text(data.releaseYear);
   newDiv.find('#plot').text(data.plot);
@@ -34,23 +34,15 @@ function makeOMDBDiv(data){
 
 function useOMDBData(data){
 // Callback function for OMDB API, collects all relevant movie info and passes as object to >>> makeOMDBDiv
-  var rottenTomatoes;
-  if (data.Ratings.length>1) {
-    rottenTomatoes=data.Ratings[1].Value;
-  }
-  else{
-    rottenTomatoes="N/A";
-  }
-  
   var OMDBData={
     IMDB:data.imdbRating,
     metacritic:data.Metascore,
-    rottenTomatoes:rottenTomatoes,
+    rottenTomatoes:data.Ratings.length>1?rottenTomatoes=data.Ratings[1].Value:'N/A',
     releaseYear:data.Year,
-    rated:data.Rated,
+    rated:data.Rated==="NOT RATED"?"NR":data.Rated,
     plot:data.Plot,
     moviePic:data.Poster
- };
+  };
  makeOMDBDiv(OMDBData);
 }
 
@@ -64,7 +56,7 @@ function onMovieReviews(){
       apikey: app.OMDB.apiKey,
       t: movieName
     };
-    alert(OMDBSettings.toSource());
+    alert(JSON.stringify(OMDBSettings));
     $.getJSON(app.OMDB.url,OMDBSettings,useOMDBData);
   });
 }

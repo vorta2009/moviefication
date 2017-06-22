@@ -34,12 +34,23 @@
 	<div id="moviesHere"></div>
 
 	<div id="template" class="movieDiv">
-		<div class="imgDiv"><img src=""></div>
-		<div class="ratingDiv"> <span id="rating"></span></div>
-		<div class="yearDiv"><span id="releaseYear"></span></div>
+		<div class="imgDiv"><img src="" id='moviePic'></div>
+		<div class="ratingDiv"> 
+			Rated:<br><span id="rating"></span><br>Release:<br><span id="releaseYear"></span></div>
+		<div class="yearDiv"></div>
 		<div class="plotDiv"><span id="plot"></span></div>
-		<div class="reviewDiv"><span id="metacritic"></span>
-			<span id="IMDB"></span><span id="rottenTomatoes"></span></div>
+		<div class="reviewDiv">
+			<div class="IMDBDiv"><span id="IMDB"></span>/10<br><!-- <span class="raterText">IMDB</span> -->
+				<img src="./imdb.jpg" class="ratingPic">
+			</div>
+			<div class="rottenTomatoesDiv">
+				<span id="rottenTomatoes"></span><br><!-- <span class="raterText">Rotten Tomatoes</span> -->
+				<img src="./rt.jpg" class="ratingPic">
+			</div>
+			<div id="metacriticDiv"><span id="metacritic"></span><br><!-- <span class="raterText">Metacritic</span> -->
+				<img src="./metacritic.png" class="ratingPic">
+			</div>
+		</div>
 	</div>
 </body>
 </html>

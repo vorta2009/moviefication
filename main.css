@@ -8,12 +8,15 @@
 	margin-right:auto;
 	border:1px solid black;
 	border-radius:5px;
-	display:block;
+	display:flex;
+	align-items:  center;
+	flex-direction: row;
 }
 
 .imgDiv>img{
 	height:100%;
 	width:auto;
+	display:block;
 	margin-left:auto;
 	margin-right:auto;
 	text-align: center;
@@ -23,24 +26,38 @@
 }
 .imgDiv{
 	height:75px;
-	width:10%;
+	width:7.5%;
 }
 .ratingDiv{
-	width:5%;
-}
-.yearDiv{
-	width:5%;
+	width:8%;
+	font-size:14px;
+	text-align: center;
 }
 .plotDiv{
 	width:60%;
 }
 .reviewDiv{
-	width:10%;
+	width:15%;
+	font-size:10px;
+	text-align: center;
 }
-/*		<div class="imgDiv"><img src=""></div>
-		<div class="ratingDiv"> <span id="rating"></span></div>
-		<div class="yearDiv"><span id="releaseYear"></span></div>
-		<div class="plotDiv"><span id="plot"></span></div>
-		<div class="reviewDiv"><span id="metacritic"></span>
-			<span id="IMDB"></span><span id="rottenTomatoes"></span></div>
-*/
+.reviewDiv div{
+	width:28%;
+	padding-left:3.5%;
+	padding-right:3.5%;
+	text-align: center;
+}
+.raterText{
+	font-size:6px;
+}
+.ratingPic{
+	display: block;
+	height:20px;
+	width: auto;
+	margin-left:auto;
+	margin-right:auto;
+}
+#metacriticDiv{
+	width:100%;
+	margin-top:5px;
+}
