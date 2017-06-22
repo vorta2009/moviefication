@@ -4,7 +4,7 @@ var app={
     apiKey:'e706bc8'
   },
   tasteDive:{
-    url:'https://tastedive.com/api/similar',
+    url:'http://tastedive.com/api/similar',
     apiKey:'274055-moviefic-4YV5JJJB'
   }
 };
@@ -63,22 +63,51 @@ function onMovieReviews(){
       apikey: app.OMDB.apiKey,
       t: movieName
     };
-    alert(JSON.stringify(OMDBSettings));
+    // alert(JSON.stringify(OMDBSettings));
+    
     $.getJSON(app.OMDB.url,OMDBSettings,useOMDBData);
+    // $.get('http://www.omdbapi.com/?apikey=e706bc8&t=%22The%20Avengers%22',function(response){alert(response.Title);});
   });
 }
 
+function handleTasteDiveOutput(data){
+  alert('in handler');
+  alert(data.info[0].Name);
+}
 
+// function onSimilarMovies(){
+//   $('#moviesHere').on('submit','.getSimMovies',function(event){
+//     event.preventDefault();
+//     var query={
+//       q:$(this).attr('mu-v'),
+//       k:app.tasteDive.apiKey
+//     };
+//     alert(JSON.stringify(query));
+//     // alert('$.getJSON(' + app.tasteDive.url +','+JSON.stringify(query) + ','+JSON.stringify(handleTasteDiveOutput));
+//     $.get('https://tastedive.com/api/similar?q=Dodgeball&k=274055-moviefic-4YV5JJJB',function(response){
+//       alert(response.Similar.Info.Name);
+//     });
+//     // $.getJSON(app.tasteDive.url,query,handleTasteDiveOutput);
+//     $.getJSON(app.tasteDive.url,query,function(response){
+//       alert('in handler');
+//     });
+//   });
+// }
 function onSimilarMovies(){
   $('#moviesHere').on('submit','.getSimMovies',function(event){
     event.preventDefault();
-    alert('getSimMovies');
-    // alert($(this).attr('mu-v'));
-//     var query={
-//       q:,
-//       k:app.tasteDive.apiKey
-//     };
-//     // $.getJSON    
+    var settings={
+      url:app.tasteDive.url,     
+      data:{
+        q:$(this).attr('mu-v'),
+        k:app.tasteDive.apiKey
+      },
+      dataType:'json',
+      type:'GET',
+      success:handleTasteDiveOutput
+    };
+    alert(JSON.stringify(settings));
+    $.ajax(settings);
   });
 }
 
