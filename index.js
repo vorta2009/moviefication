@@ -1,6 +1,6 @@
 var app={
   OMDB:{
-    URL:'http://www.OMDBapi.com',
+    url:'http://www.OMDBapi.com',
     apiKey:'e706bc8'
   }
 };
@@ -19,9 +19,21 @@ function onPermission(){
 }
 
 function useOMDBData(data){
-  alert('hey');
-  alert('IMDB: '+data.imdbRating + ' Metascore:' + data.Metascore  + ' Rotten Tomatoes: ' + data.Ratings[1].Value );
-  alert('next line');
+// Callback function for OMDB API, collects ratings and posts these
+  var rottenTomatoes;
+  if (data.Ratings.length>1) then{
+    rottenTomatoes=data.Ratings[1].Value;
+  }
+  else{
+    rottenTomatoes="N/A";
+  }
+  var IMDB=data.imdbRating;
+  var metacritic=data.Metascore;
+  var releaseYear=data.Year;
+  var rated=data.Rated;
+  var plot=data.Plot;
+  var moviePic=data.Poster;
+
 }
 
 
@@ -35,7 +47,7 @@ function onMovieReviews(){
       t: movieName
     };
     alert(OMDBSettings.toSource());
-    $.getJSON(app.OMDB.URL,OMDBSettings,useOMDBData);
+    $.getJSON(app.OMDB.url,OMDBSettings,useOMDBData);
   });
 }
 // function onMovieReviewsT(){
@@ -47,7 +59,7 @@ function onMovieReviews(){
 //     var movieName=$(this).find('input').val();
     
 //     var OMDBSettings={
-//         url:app.OMDB.URL,
+//         url:app.OMDB.url,
 //         data:{
 //             apikey: app.OMDB.apiKey,
 //             t: movieName
