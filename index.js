@@ -28,13 +28,16 @@ function makeOMDBDiv(data){
   newDiv.find('#metacritic').text(data.metacritic);
   newDiv.find('#IMDB').text(data.IMDB);
   newDiv.find('#rottenTomatoes').text(data.rottenTomatoes);
+  newDiv.find('.getSimMovies').attr('mu-v',data.movieName);
   newDiv.removeAttr('id');
   $('#moviesHere').append(newDiv);
 }
 
 function useOMDBData(data){
 // Callback function for OMDB API, collects all relevant movie info and passes as object to >>> makeOMDBDiv
+  
   var OMDBData={
+    movieName:data.Title,
     IMDB:data.imdbRating,
     metacritic:data.Metascore,
     rottenTomatoes:data.Ratings.length>1?rottenTomatoes=data.Ratings[1].Value:'N/A',
@@ -60,32 +63,14 @@ function onMovieReviews(){
     $.getJSON(app.OMDB.url,OMDBSettings,useOMDBData);
   });
 }
-// function onMovieReviewsT(){
 
-//   $('#movieReviews').on('submit',function(event){
-//     event.preventDefault();
-//     alert('1');
-
-//     var movieName=$(this).find('input').val();
-    
-//     var OMDBSettings={
-//         url:app.OMDB.url,
-//         data:{
-//             apikey: app.OMDB.apiKey,
-//             t: movieName
-//         },
-//         dataType:'json',
-//         type:'GET',
-//         success:useOMDBData
-//     };
-//     alert('2');
-//     alert(OMDBSettings.toSource());
-//     $.ajax(OMDBSettings);
-//   });
-// }
+function onSimilarMovies(){
+  $('')
+}
 
 $(function(){
   onPermission();
   onMovieReviews();
+  onSimilarMovies();
 });
 alert('hey');
