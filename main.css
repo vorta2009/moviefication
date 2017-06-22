@@ -1,0 +1,15 @@
+#template{
+	display:none;
+}
+.movieDiv{
+	width:800px;
+	margin-left:auto;
+	margin-right:auto;
+	border:1px solid black;
+	border-radius:5px;
+	display:block;
+}
+.imgDiv>img{
+	height:100px;
+	width:75px;
+}

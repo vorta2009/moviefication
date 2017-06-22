@@ -6,30 +6,40 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
 <body>
-<script >
-	window.fbAsyncInit = function() {
-	    FB.init({
-	      appId      : '111394756143084',
-	      xfbml      : true,
-	      version    : 'v2.9'
-	    });
-	    FB.AppEvents.logPageView();
-	  };
+	<script >
+		window.fbAsyncInit = function() {
+		    FB.init({
+		      appId      : '111394756143084',
+		      xfbml      : true,
+		      version    : 'v2.9'
+		    });
+		    FB.AppEvents.logPageView();
+		  };
 
-	  (function(d, s, id){
-	     var js, fjs = d.getElementsByTagName(s)[0];
-	     if (d.getElementById(id)) {return;}
-	     js = d.createElement(s); js.id = id;
-	     js.src = "//connect.facebook.net/en_US/sdk.js";
-	     fjs.parentNode.insertBefore(js, fjs);
-	   }(document, 'script', 'facebook-jssdk'));
-</script>
+		  (function(d, s, id){
+		     var js, fjs = d.getElementsByTagName(s)[0];
+		     if (d.getElementById(id)) {return;}
+		     js = d.createElement(s); js.id = id;
+		     js.src = "//connect.facebook.net/en_US/sdk.js";
+		     fjs.parentNode.insertBefore(js, fjs);
+		   }(document, 'script', 'facebook-jssdk'));
+	</script>
 
-<script src="./index.js"></script>
-<button id="fbPermission">Login with Facebook</button>
+	<script src="./index.js"></script>
+	<button id="fbPermission">Login with Facebook</button>
 
-<form id='movieReviews'>
-	<input type='text' id='movie2Review' placeholder='Dodgeball'><button type='submit'>Find reviews</button>
-</form>
+	<form id='movieReviews'>
+		<input type='text' id='movie2Review' placeholder='Dodgeball'><button type='submit'>Find reviews</button>
+	</form>
+	<div id="moviesHere"></div>
+
+	<div id="template" class="movieDiv">
+		<div class="imgDiv"><img src=""></div>
+		<div class="ratingDiv"> <span id="rating"></span></div>
+		<div class="yearDiv"><span id="releaseYear"></span></div>
+		<div class="plotDiv"><span id="plot"></span></div>
+		<div class="reviewDiv"><span id="metacritic"></span>
+			<span id="IMDB"></span><span id="rottenTomatoes"></span></div>
+	</div>
 </body>
 </html>

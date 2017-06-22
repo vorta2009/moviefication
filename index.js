@@ -18,22 +18,40 @@ function onPermission(){
     });
 }
 
+function makeOMDBDiv(data){
+// Uses data from OMDB API to populate a template div
+  var newDiv=$('#template').clone();
+  newDiv.find('img').attr('src',data.moviePic);
+  newDiv.find('#rating').text(data.rated);
+  newDiv.find('#releaseYear').text(data.releaseYear);
+  newDiv.find('#plot').text(data.plot);
+  newDiv.find('#metacritic').text(data.metacritic);
+  newDiv.find('#IMDB').text(data.IMDB);
+  newDiv.find('#rottenTomatoes').text(data.rottenTomatoes);
+  newDiv.removeAttr('id');
+  $('#moviesHere').append(newDiv);
+}
+
 function useOMDBData(data){
-// Callback function for OMDB API, collects ratings and posts these
+// Callback function for OMDB API, collects all relevant movie info and passes as object to >>> makeOMDBDiv
   var rottenTomatoes;
-  if (data.Ratings.length>1) then{
+  if (data.Ratings.length>1) {
     rottenTomatoes=data.Ratings[1].Value;
   }
   else{
     rottenTomatoes="N/A";
   }
-  var IMDB=data.imdbRating;
-  var metacritic=data.Metascore;
-  var releaseYear=data.Year;
-  var rated=data.Rated;
-  var plot=data.Plot;
-  var moviePic=data.Poster;
-
+  
+  var OMDBData={
+    IMDB:data.imdbRating,
+    metacritic:data.metascore,
+    rottenTomatoes:rottenTomatoes,
+    releaseYear:data.Year,
+    rated:data.Rated,
+    plot:data.Plot,
+    moviePic:data.Poster
+ };
+ makeOMDBDiv(OMDBData);
 }
 
 
@@ -78,3 +96,4 @@ $(function(){
   onPermission();
   onMovieReviews();
 });
+alert('hey');
