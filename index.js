@@ -9,15 +9,16 @@ var app={
 function onPermission(){
 
     $('#fbPermission').on('click',function(event){
+      alert('hey');
       event.preventDefault();
       FB.login(function(){
-        FB.api('/me/friends', {fields: 'movies'}, function(response) {
+        FB.api('/me', {fields: 'first_name'}, function(response) {
           console.log(response);
         });
       }, {scope: 'user_friends,email,publish_actions'});
     });
 }
-
+// asdasd
 function makeOMDBDiv(data){
 // Uses data from OMDB API to populate a template div
   var newDiv=$('#template').clone();
