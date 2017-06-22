@@ -1,5 +1,13 @@
+var app={
+  OMDB:{
+    URL:'http://www.OMDBapi.com',
+    apiKey:'e706bc8'
+  }
+};
 
-  function onPermission(){
+
+function onPermission(){
+
     $('#fbPermission').on('click',function(event){
       event.preventDefault();
       FB.login(function(){
@@ -9,15 +17,53 @@
       }, {scope: 'user_friends,email,publish_actions'});
     });
 }
-function onTest(){
-  $('#btnTest').on('click',function(event){
-    alert('hey');
-    
+
+function useOMDBData(data){
+  alert('hey');
+  alert(data.Title);
+}
+
+
+function onMovieReviews(){
+  alert('hey1');
+  $('#movieReviews').on('submit',function(event){
+    event.preventDefault();
+
+    var movieName=$(this).find('input').val();
+    var OMDBSettings={
+      apikey: app.OMDB.apiKey,
+      t: movieName
+    };
+    alert(OMDBSettings.toSource());
+    $.getJSON(app.OMDB.URL,OMDBSettings,useOMDBData);
   });
 }
+// function onMovieReviewsT(){
+
+//   $('#movieReviews').on('submit',function(event){
+//     event.preventDefault();
+//     alert('1');
+
+//     var movieName=$(this).find('input').val();
+    
+//     var OMDBSettings={
+//         url:app.OMDB.URL,
+//         data:{
+//             apikey: app.OMDB.apiKey,
+//             t: movieName
+//         },
+//         dataType:'json',
+//         type:'GET',
+//         success:useOMDBData
+//     };
+//     alert('2');
+//     alert(OMDBSettings.toSource());
+//     $.ajax(OMDBSettings);
+//   });
+// }
 
 $(function(){
   onPermission();
-  onTest();
-})
-// alert('hey');
+  // onTest();
+  onMovieReviews();
+});
