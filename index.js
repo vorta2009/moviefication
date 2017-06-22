@@ -20,12 +20,12 @@ function onPermission(){
 
 function useOMDBData(data){
   alert('hey');
-  alert(data.Title);
+  alert('IMDB: '+data.imdbRating + ' Metascore:' + data.Metascore  + ' Rotten Tomatoes: ' + data.Ratings[1].Value );
+  alert('next line');
 }
 
 
 function onMovieReviews(){
-  alert('hey1');
   $('#movieReviews').on('submit',function(event){
     event.preventDefault();
 
@@ -64,6 +64,5 @@ function onMovieReviews(){
 
 $(function(){
   onPermission();
-  // onTest();
   onMovieReviews();
 });
