@@ -2,6 +2,10 @@ var app={
   OMDB:{
     url:'http://www.OMDBapi.com',
     apiKey:'e706bc8'
+  },
+  tasteDive:{
+    url:'https://tastedive.com/api/similar',
+    apiKey:'274055-moviefic-4YV5JJJB'
   }
 };
 
@@ -65,7 +69,11 @@ function onMovieReviews(){
 }
 
 function onSimilarMovies(){
-  $('')
+  $('.getSimMovies').on('submit',function(event){
+    event.preventDefault();
+    
+    alert('hey');
+  });
 }
 
 $(function(){
