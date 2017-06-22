@@ -3,13 +3,44 @@
 }
 .movieDiv{
 	width:800px;
+	height:75px;
 	margin-left:auto;
 	margin-right:auto;
 	border:1px solid black;
 	border-radius:5px;
 	display:block;
 }
+
 .imgDiv>img{
-	height:100px;
-	width:75px;
+	height:100%;
+	width:auto;
+	margin-left:auto;
+	margin-right:auto;
+	text-align: center;
 }
+.movieDiv div{
+	display:inline-block;
+}
+.imgDiv{
+	height:75px;
+	width:10%;
+}
+.ratingDiv{
+	width:5%;
+}
+.yearDiv{
+	width:5%;
+}
+.plotDiv{
+	width:60%;
+}
+.reviewDiv{
+	width:10%;
+}
+/*		<div class="imgDiv"><img src=""></div>
+		<div class="ratingDiv"> <span id="rating"></span></div>
+		<div class="yearDiv"><span id="releaseYear"></span></div>
+		<div class="plotDiv"><span id="plot"></span></div>
+		<div class="reviewDiv"><span id="metacritic"></span>
+			<span id="IMDB"></span><span id="rottenTomatoes"></span></div>
+*/

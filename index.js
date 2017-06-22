@@ -44,7 +44,7 @@ function useOMDBData(data){
   
   var OMDBData={
     IMDB:data.imdbRating,
-    metacritic:data.metascore,
+    metacritic:data.Metascore,
     rottenTomatoes:rottenTomatoes,
     releaseYear:data.Year,
     rated:data.Rated,
