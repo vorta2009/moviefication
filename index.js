@@ -68,11 +68,17 @@ function onMovieReviews(){
   });
 }
 
+
 function onSimilarMovies(){
-  $('.getSimMovies').on('submit',function(event){
+  $('#moviesHere').on('submit','.getSimMovies',function(event){
     event.preventDefault();
-    
-    alert('hey');
+    alert('getSimMovies');
+    // alert($(this).attr('mu-v'));
+//     var query={
+//       q:,
+//       k:app.tasteDive.apiKey
+//     };
+//     // $.getJSON    
   });
 }
 
@@ -81,4 +87,4 @@ $(function(){
   onMovieReviews();
   onSimilarMovies();
 });
-alert('hey');
+alert('Page Start');
