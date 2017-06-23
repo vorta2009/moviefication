@@ -6,19 +6,6 @@ var app={
 };
 
 
-function onPermission(){
-
-    $('#fbPermission').on('click',function(event){
-      alert('hey');
-      event.preventDefault();
-      FB.login(function(){
-        FB.api('/me', {fields: 'first_name'}, function(response) {
-          console.log(response);
-        });
-      }, {scope: 'user_friends,email,publish_actions'});
-    });
-}
-// asdasd
 function makeOMDBDiv(data){
 // Uses data from OMDB API to populate a template div
   var newDiv=$('#template').clone();
@@ -61,32 +48,7 @@ function onMovieReviews(){
     $.getJSON(app.OMDB.url,OMDBSettings,useOMDBData);
   });
 }
-// function onMovieReviewsT(){
-
-//   $('#movieReviews').on('submit',function(event){
-//     event.preventDefault();
-//     alert('1');
-
-//     var movieName=$(this).find('input').val();
-    
-//     var OMDBSettings={
-//         url:app.OMDB.url,
-//         data:{
-//             apikey: app.OMDB.apiKey,
-//             t: movieName
-//         },
-//         dataType:'json',
-//         type:'GET',
-//         success:useOMDBData
-//     };
-//     alert('2');
-//     alert(OMDBSettings.toSource());
-//     $.ajax(OMDBSettings);
-//   });
-// }
-
 $(function(){
-  onPermission();
   onMovieReviews();
 });
 alert('hey');

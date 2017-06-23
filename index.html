@@ -6,38 +6,6 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
 <body>
-	<script >
-		window.fbAsyncInit = function() {
-		    FB.init({
-		      appId      : '111394756143084',
-		      //'111394756143084' non dev appid
-		      xfbml      : true,
-		      version    : 'v2.9'
-		    });
-		    FB.AppEvents.logPageView();
-		  };
-		  FB.getLoginStatus(function(response){
-		  	if(response.status==='connected'){
-		  		document.getElementById('status').innerHTML('Connected');
-		  	}
-		  	else{
-		  		document.getElementById('status').innerHTML('NOT connected');	
-		  	}
-		  });
-		  (function(d, s, id){
-		     var js, fjs = d.getElementsByTagName(s)[0];
-		     if (d.getElementById(id)) {return;}
-		     js = d.createElement(s); js.id = id;
-		     js.src = "//connect.facebook.net/en_US/sdk.js";
-		     fjs.parentNode.insertBefore(js, fjs);
-		   }(document, 'script', 'facebook-jssdk'));
-	</script>
-	 <div id="status"></div>
-
-
-	<script src="./index.js"></script>
-	<button id="fbPermission">Login with Facebook</button>
-
 	<form id='movieReviews'>
 		<input type='text' id='movie2Review' placeholder='Dodgeball'><button type='submit'>Find reviews</button>
 	</form>
@@ -62,5 +30,7 @@
 			</div>
 		</div>
 	</div>
+
+<script src="./index.js"></script>
 </body>
 </html>
