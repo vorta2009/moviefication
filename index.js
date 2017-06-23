@@ -10,17 +10,6 @@ var app={
 };
 
 
-function onPermission(){
-
-    $('#fbPermission').on('click',function(event){
-      event.preventDefault();
-      FB.login(function(){
-        FB.api('/me', {fields: 'email,first_name'}, function(response) {
-          alert(response);
-        });
-      }, {scope: 'user_friends,email,publish_actions'});
-    });
-}
 
 function makeOMDBDiv(data){
 // Uses data from OMDB API to populate a template div
@@ -75,24 +64,6 @@ function handleTasteDiveOutput(data){
   alert(data.info[0].Name);
 }
 
-// function onSimilarMovies(){
-//   $('#moviesHere').on('submit','.getSimMovies',function(event){
-//     event.preventDefault();
-//     var query={
-//       q:$(this).attr('mu-v'),
-//       k:app.tasteDive.apiKey
-//     };
-//     alert(JSON.stringify(query));
-//     // alert('$.getJSON(' + app.tasteDive.url +','+JSON.stringify(query) + ','+JSON.stringify(handleTasteDiveOutput));
-//     $.get('https://tastedive.com/api/similar?q=Dodgeball&k=274055-moviefic-4YV5JJJB',function(response){
-//       alert(response.Similar.Info.Name);
-//     });
-//     // $.getJSON(app.tasteDive.url,query,handleTasteDiveOutput);
-//     $.getJSON(app.tasteDive.url,query,function(response){
-//       alert('in handler');
-//     });
-//   });
-// }
 function onSimilarMovies(){
   $('#moviesHere').on('submit','.getSimMovies',function(event){
     event.preventDefault();
@@ -112,7 +83,6 @@ function onSimilarMovies(){
 }
 
 $(function(){
-  onPermission();
   onMovieReviews();
   onSimilarMovies();
 });
