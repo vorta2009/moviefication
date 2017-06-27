@@ -11,6 +11,7 @@ var app={
 
 
 
+
 function makeOMDBDiv(data){
 // Uses data from OMDB API to populate a template div
   var newDiv=$('#template').clone();
@@ -60,8 +61,9 @@ function onMovieReviews(){
 }
 
 function handleTasteDiveOutput(data){
-  alert('in handler');
-  alert(data.info[0].Name);
+  for(var i=0;i<data.Similar.Results.length;i++){
+    console.log(data.Similar.Results[i].Name);
+  }
 }
 
 function onSimilarMovies(){
@@ -86,4 +88,4 @@ $(function(){
   onMovieReviews();
   onSimilarMovies();
 });
-alert('Page Start');
+// alert('Page Start');
