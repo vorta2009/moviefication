@@ -40,23 +40,20 @@ function useOMDBData(data){
     plot:data.Plot,
     moviePic:data.Poster
   };
- makeOMDBDiv(OMDBData);
+  return OMDBData;
+ // makeOMDBDiv(OMDBData);
 }
+function runSimilar(movieName){
 
+}
 
 function onMovieReviews(){
   $('#movieReviews').on('submit',function(event){
     event.preventDefault();
 
     var movieName=$(this).find('input').val();
-    var OMDBSettings={
-      apikey: app.OMDB.apiKey,
-      t: movieName
-    };
-    // alert(JSON.stringify(OMDBSettings));
-    
-    $.getJSON(app.OMDB.url,OMDBSettings,useOMDBData);
-    // $.get('http://www.omdbapi.com/?apikey=e706bc8&t=%22The%20Avengers%22',function(response){alert(response.Title);});
+    createPage(movieName);
+    // runSimilar(movieName);
   });
 }
 
@@ -66,21 +63,36 @@ function handleTasteDiveOutput(data){
   }
 }
 
+function getReviews(movieName){
+    var OMDBSettings={
+      apikey: app.OMDB.apiKey,
+      t: movieName
+    };
+    
+    var movieOutput=$.getJSON(app.OMDB.url,OMDBSettings,useOMDBData);
+    console.log(movieOutput);
+    // runSimilar(movieName);
+}
+
+function createDiv(movieTitle){
+  getReviews(movieTitle); 
+}
+function findSimMovies(){}
+function createPage(movieTitle1){
+      createDiv(movieTitle1);
+}
+
+
 function onSimilarMovies(){
   $('#moviesHere').on('submit','.getSimMovies',function(event){
     event.preventDefault();
     var settings={
-      url:app.tasteDive.url,     
-      data:{
         q:$(this).attr('mu-v'),
-        k:app.tasteDive.apiKey
-      },
-      dataType:'json',
-      type:'GET',
-      success:handleTasteDiveOutput
+        k:app.tasteDive.apiKey,
+        verbose:1
     };
     alert(JSON.stringify(settings));
-    $.ajax(settings);
+    $.getJSON(app.tasteDive.url,settings,handleTasteDiveOutput);
   });
 }
 
