@@ -1,10 +1,10 @@
 var app={
   OMDB:{
-    url:'http://www.OMDBapi.com',
+    url:'https://www.OMDBapi.com',
     apiKey:'e706bc8'
   },
   tasteDive:{
-    url:'http://tastedive.com/api/similar',
+    url:'https://tastedive.com/api/similar',
     apiKey:'274055-moviefic-4YV5JJJB'
   },
   movieArr:[],
