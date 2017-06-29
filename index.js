@@ -56,30 +56,38 @@ function onMovieReviews(){
 
 function handleTasteDiveOutput(data){
   //store an array of tasteDive similar movie results in our app variable to access later
-  app.movieArr=data.Similar.Results;
-  console.log(app.movieArr);
+  console.log(data.Similar.Results);
+  var movieArr=data.Similar.Results;
+  for (i=0;i<movieArr.length;i++){
+    findReviews(movieArr[i].Name);
+  }
 }
 
 function findSimMovies(movieName){
 // Function which updates the app object with the movies that are similar to primary search object
-    alert('in sim movies');
     var settings={
         q:movieName,
         k:app.tasteDive.apiKey,
-        verbose:"1"
+        verbose:"1",
+        limit:20
     };
+    console.log(settings);
     $.getJSON(app.tasteDive.url,settings,handleTasteDiveOutput);
 }
-function createPage(movieName){
- // 
 
- // Code to run review for first movie
-    var OMDBSettings={         
+function findReviews(movieName){
+      var OMDBSettings={           
       apikey: app.OMDB.apiKey,
       t: movieName
     };
     $.getJSON(app.OMDB.url,OMDBSettings,runReviewAJAX);
- 
+
+}
+
+function createPage(movieName){
+ // 
+
+ findReviews(movieName); 
   findSimMovies(movieName);
 
 }
