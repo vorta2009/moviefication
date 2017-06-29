@@ -6,7 +6,8 @@ var app={
   tasteDive:{
     url:'http://tastedive.com/api/similar',
     apiKey:'274055-moviefic-4YV5JJJB'
-  }
+  },
+  movieArr:[]
 };
 
 
@@ -23,13 +24,14 @@ function makeOMDBDiv(data){
   newDiv.find('#IMDB').text(data.IMDB);
   newDiv.find('#rottenTomatoes').text(data.rottenTomatoes);
   newDiv.find('.getSimMovies').attr('mu-v',data.movieName);
+  newDiv.find('.getSimMovies').attr('mu-v',data.movieName);
+  newDiv.attr('divNum',$('#moviesHere>.movieDiv').length.toString());
   newDiv.removeAttr('id');
   $('#moviesHere').append(newDiv);
 }
 
-function useOMDBData(data){
-// Callback function for OMDB API, collects all relevant movie info and passes as object to >>> makeOMDBDiv
-  
+function runReviewAJAX(data){
+// Callback function for OMDB API, collects all relevant movie info and passes as object to >>> makeOMDBDiv  
   var OMDBData={
     movieName:data.Title,
     IMDB:data.imdbRating,
@@ -38,61 +40,54 @@ function useOMDBData(data){
     releaseYear:data.Year,
     rated:data.Rated==="NOT RATED"?"NR":data.Rated,
     plot:data.Plot,
-    moviePic:data.Poster
+    moviePic:data.Poster,
   };
-  return OMDBData;
- // makeOMDBDiv(OMDBData);
-}
-function runSimilar(movieName){
-
+  makeOMDBDiv(OMDBData);
 }
 
 function onMovieReviews(){
+  // Handles user querying a movie in top-left movie bar
   $('#movieReviews').on('submit',function(event){
     event.preventDefault();
-
     var movieName=$(this).find('input').val();
     createPage(movieName);
-    // runSimilar(movieName);
   });
 }
 
 function handleTasteDiveOutput(data){
-  for(var i=0;i<data.Similar.Results.length;i++){
-    console.log(data.Similar.Results[i].Name);
-  }
+  //store an array of tasteDive similar movie results in our app variable to access later
+  app.movieArr=data.Similar.Results;
+  console.log(app.movieArr);
 }
 
-function getReviews(movieName){
-    var OMDBSettings={
+function findSimMovies(movieName){
+// Function which updates the app object with the movies that are similar to primary search object
+    alert('in sim movies');
+    var settings={
+        q:movieName,
+        k:app.tasteDive.apiKey,
+        verbose:"1"
+    };
+    $.getJSON(app.tasteDive.url,settings,handleTasteDiveOutput);
+}
+function createPage(movieName){
+ // 
+
+ // Code to run review for first movie
+    var OMDBSettings={         
       apikey: app.OMDB.apiKey,
       t: movieName
     };
-    
-    var movieOutput=$.getJSON(app.OMDB.url,OMDBSettings,useOMDBData);
-    console.log(movieOutput);
-    // runSimilar(movieName);
-}
+    $.getJSON(app.OMDB.url,OMDBSettings,runReviewAJAX);
+ 
+  findSimMovies(movieName);
 
-function createDiv(movieTitle){
-  getReviews(movieTitle); 
 }
-function findSimMovies(){}
-function createPage(movieTitle1){
-      createDiv(movieTitle1);
-}
-
 
 function onSimilarMovies(){
   $('#moviesHere').on('submit','.getSimMovies',function(event){
     event.preventDefault();
-    var settings={
-        q:$(this).attr('mu-v'),
-        k:app.tasteDive.apiKey,
-        verbose:1
-    };
-    alert(JSON.stringify(settings));
-    $.getJSON(app.tasteDive.url,settings,handleTasteDiveOutput);
+    createPage($(this).attr('mu-v'));
   });
 }
 
