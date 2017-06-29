@@ -9,8 +9,8 @@
 	<form id='movieReviews'>
 		<input type='text' id='movie2Review' placeholder='Dodgeball'><button type='submit'>Find reviews</button>
 	</form>
-	<div id="moviesHere"></div>
-
+	<div id="moviesHere">
+	</div>
 	<div id="template" class="movieDiv">
 		<div class="imgDiv"><img src="" id='moviePic'></div>
 		<div class="ratingDiv"> 
@@ -18,17 +18,18 @@
 		<div class="yearDiv"></div>
 		<div class="plotDiv"><span id="plot"></span></div>
 		<div class="reviewDiv">
-			<div class="IMDBDiv"><span id="IMDB"></span>/10<br><!-- <span class="raterText">IMDB</span> -->
+			<div class="IMDBDiv"><span id="IMDB"></span>/10<br>
 				<img src="./imdb.jpg" class="ratingPic">
 			</div>
 			<div class="rottenTomatoesDiv">
-				<span id="rottenTomatoes"></span><br><!-- <span class="raterText">Rotten Tomatoes</span> -->
+				<span id="rottenTomatoes"></span><br>
 				<img src="./rt.jpg" class="ratingPic">
 			</div>
-			<div id="metacriticDiv"><span id="metacritic"></span><br><!-- <span class="raterText">Metacritic</span> -->
+			<div id="metacriticDiv"><span id="metacritic"></span><br>
 				<img src="./metacritic.png" class="ratingPic">
 			</div>
 		</div>
+		<form class="getSimMovies" mu-v=""><button type="submit">Find similar<br>movies</button></form>
 	</div>
 
 <script src="./index.js"></script>
