@@ -8,14 +8,24 @@ var app={
     apiKey:'274055-moviefic-4YV5JJJB'
   },
   movieArr:[],
+  firstMovie:{},
+  i:0,
   endArr:false
 };
 
 
+function makeTeaserText(wTeaser){
+  var teaserLen=260;
+  var text=wTeaser.substring(0,teaserLen);
+  text=text.replace(/\w+$/, '');
+  text+='...';
+  return text;
+}
+
 function makeOMDBDiv(data){
 // Uses data from OMDB API to populate a template div
   var newDiv=$('#template').clone();
-  newDiv.find('#moviePic').attr('src',data.moviePic);
+  newDiv.find('#moviePic').attr('src',  (data.moviePic==="N/A"?'':data.moviePic)  );
   newDiv.find('#rating').text(data.rated);
   newDiv.find('#releaseYear').text(data.releaseYear);
   newDiv.find('#plot').text(data.plot);
@@ -23,26 +33,34 @@ function makeOMDBDiv(data){
   newDiv.find('#IMDB').text(data.IMDB);
   newDiv.find('#rottenTomatoes').text(data.rottenTomatoes);
   newDiv.find('.getSimMovies').attr('mu-v',data.movieName);
-  // console.log('in makeOMDBDiv ' + $('#moviesHere>.movieDiv').length + ' name: ' + data.movieName);
+
   if ($('.movieDiv').length===1){
    $('#chosenMovie').append(newDiv);
-   newDiv.removeAttr('id');
+   // newDiv.find('#plot').text(data.movieName+": "+app.movieArr[app.i].wTeaser); 
   }
   else{
-    newDiv.attr('divNum',$('#moviesHere>.movieDiv').length.toString());
+    newDiv.attr('divNum',app.i);
+    newDiv.find('#plot').text(makeTeaserText(app.movieArr[app.i].wTeaser));
     $('#moviesHere').append(newDiv);
+    app.i++;
   }
   if (app.endArr){
+    console.log(app.i);
+    console.log('in appEndArr');
     $('#moviesHere').find('.movieDiv').sort(function(a,b){
       return parseFloat($(b).find('#metacritic').text()==="N/A"?"0":$(b).find('#metacritic').text())
         -parseFloat($(a).find('#metacritic').text()==="N/A"?"0":$(a).find('#metacritic').text());
     }).appendTo('#moviesHere');
+    $('#chosenMovie').find('.movieDiv').removeAttr('id');
     $('#moviesHere').find('.movieDiv').removeAttr('id');
+    $('#chosenMovie #plot').text(makeTeaserText(app.firstMovie[0].wTeaser));
   } 
 }
 
 function runReviewAJAX(data){
 // Callback function for OMDB API, collects all relevant movie info and passes as object to >>> makeOMDBDiv  
+  
+
     if('Error' in data){return;}
   var OMDBData={
     movieName:data.Title,
@@ -54,6 +72,7 @@ function runReviewAJAX(data){
     plot:data.Plot,
     moviePic:data.Poster,
   };
+  app.endArr= (app.i===app.movieArr.length-1);
   makeOMDBDiv(OMDBData);
 }
 
@@ -70,11 +89,11 @@ function handleTasteDiveOutput(data){
   //store an array of tasteDive similar movie results in our app variable to access later
   console.log(data.Similar.Results);
   app.movieArr=data.Similar.Results;
+  app.firstMovie=data.Similar.Info;
   for (i=0;i<app.movieArr.length;i++){
     findReviews(app.movieArr[i].Name);
-    console.log(i + "/" + app.movieArr.length);
-    app.endArr=(i===app.movieArr.length-1);
-    console.log(app.endArr);
+    // console.log(i + "/" + app.movieArr.length);
+    // console.log(app.endArr);
   }
 }
 
@@ -106,6 +125,8 @@ $('#chosenMovie').empty();
 $('#moviesHere').empty();
 app.movieArr=[];
 app.endArr=false;
+app.i=0;
+app.firstMovie={};
  findReviews(movieName); 
   findSimMovies(movieName);
 
